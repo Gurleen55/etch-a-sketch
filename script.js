@@ -13,10 +13,12 @@ function createHover(){
 
     hover.addEventListener("mouseover", (e) => {
         e.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+
     }); 
-    stopHovering();
+    
     });
 }
+
 
 const btn = document.querySelector('#colored-grid');
 btn.addEventListener('click', () => {
