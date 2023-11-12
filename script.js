@@ -59,10 +59,10 @@ function makeNewGrid() {
 function getUserPrompt() {
     do {
     boxes = prompt("how many squares per side you want for the new grid(between 1-69)",)
-    if (boxes == null || boxes <= 0 || boxes > 70 || boxes == " "){
+    if (boxes == null || boxes <= 0 || boxes > 69 || boxes == " "){
         alert("invalid input")
     }
-    } while (boxes == null || boxes <= 0 || boxes > 70 || boxes == " ");
+    } while (boxes == null || boxes <= 0 || boxes > 69 || boxes == " ");
     
 
 
