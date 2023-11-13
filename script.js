@@ -1,24 +1,35 @@
 let boxes;
 let container = document.getElementById('container');
+let erasor = true;
+const INITIAL_SIZE = 16;
+let color = 255;
 
-for(let i = 0; i < 256; i++){
-    let newDiv = document.createElement('div');
-    newDiv.classList.add('grid');
-    container.appendChild(newDiv);
-}
+
+
 function createHover(){
     let startSketching = document.querySelector("#container");
     startSketching.addEventListener("click", () =>{
         let hover = document.querySelector("#container");
 
     hover.addEventListener("mouseover", (e) => {
-        e.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+        
+        e.target.style.backgroundColor = `rgb(${color}, ${color}, ${color})`
+        color = color - 5;
+        
 
     }); 
     
     });
 }
+function makeInitialGrid(){
+    for(let i = 0; i < INITIAL_SIZE * INITIAL_SIZE; i++){
+        let newDiv = document.createElement('div');
+        newDiv.classList.add('grid');
+        container.appendChild(newDiv);
+     }
+}
 
+makeInitialGrid();
 
 const btn = document.querySelector('#colored-grid');
 btn.addEventListener('click', () => {
@@ -38,6 +49,7 @@ function removeGrid() {
 }
 
 function makeNewGrid() {
+    
     getUserPrompt();
     let numberOfBoxes = boxes * boxes;
     for (let i = 0; i < numberOfBoxes; i++){
@@ -51,7 +63,7 @@ function makeNewGrid() {
     newDivs.forEach(element => {
         element.style.height = newHeight.toString() + "px";
         element.style.width = newWidth.toString() + "px";
-       createHover()
+      
     })
 
 };
@@ -73,6 +85,17 @@ function resetgrid() {
     newGrid.forEach(element => {
         element.style.backgroundColor = "beige";
     })
+    color = 255;
 }
 
 document.querySelector("#reset").addEventListener("click", resetgrid);
+document.querySelector("#erasor").addEventListener("click", eraseGrid);
+document.querySelector("#start").addEventListener("click", createHover);
+
+function eraseGrid() {
+    const grid = document.querySelector("#container");
+    grid.addEventListener("mouseover", (e) => {
+        e.target.style.backgroundColor = "beige";
+    })
+}
+
