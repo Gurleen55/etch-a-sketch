@@ -1,4 +1,4 @@
-let boxes;
+
 let container = document.getElementById('container');
 let erasor = true;
 const INITIAL_SIZE = 16;
