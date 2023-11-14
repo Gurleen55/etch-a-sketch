@@ -1,28 +1,34 @@
 
 let container = document.getElementById('container');
-let erasor = true;
 const INITIAL_SIZE = 16;
-let color = 255;
+
+let click = false;
+let choice = "black";
+
+
 
 
 makeNewGrid(INITIAL_SIZE);
 
 function createHover(){
-    let startSketching = document.querySelector("#container");
-    startSketching.addEventListener("click", () =>{
-        let hover = document.querySelector("#container");
 
-    hover.addEventListener("mouseover", (e) => {
+       
+        // let startSketching = document.querySelector("#container");
+        // startSketching.addEventListener("click", () =>{
         
-        e.target.style.backgroundColor = `rgb(${color}, ${color}, ${color})`
-        color = color - 5;
-        
-        
-
-    }); 
+            let hover = document.querySelector("#container");
+            hover.addEventListener("mouseover", (e) => {
+            
+            if (click){
+                e.target.style.backgroundColor = choice;
+            
+               
+            }; 
     
-    });
-}
+            })
+          
+       }   // });
+    
 
 
 const btn = document.querySelector('#colored-grid');
@@ -30,6 +36,8 @@ btn.addEventListener('click', () => {
     
     removeGrid();
     makeNewGrid(getUserPrompt());
+    click = false;
+    choice = "black"
 });
 
 function removeGrid() {
@@ -79,17 +87,27 @@ function resetgrid() {
     newGrid.forEach(element => {
         element.style.backgroundColor = "beige";
     })
-    color = 255;
+    click = false;
+    choice = "black"
 }
 
 document.querySelector("#reset").addEventListener("click", resetgrid);
-document.querySelector("#erasor").addEventListener("click", eraseGrid);
-document.querySelector("#start").addEventListener("click", createHover);
+document.querySelector("#erasor").addEventListener("click", () => {
+    choice = "beige";
+    createHover();
+});
 
-function eraseGrid() {
-    const grid = document.querySelector("#container");
-    grid.addEventListener("mouseover", (e) => {
-        e.target.style.backgroundColor = "beige";
-    })
-}
+document.querySelector("#start").addEventListener("click", () => {
+    choice = "black";
+    createHover();
+});
+
+
+
+document.querySelector('#container').addEventListener("click", () => {
+    click = !click;
+    
+})
+
+document.querySelector("#container").addEventListener("click", createHover)
 
