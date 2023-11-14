@@ -5,6 +5,7 @@ const INITIAL_SIZE = 16;
 let color = 255;
 
 
+makeNewGrid(INITIAL_SIZE);
 
 function createHover(){
     let startSketching = document.querySelector("#container");
@@ -16,26 +17,19 @@ function createHover(){
         e.target.style.backgroundColor = `rgb(${color}, ${color}, ${color})`
         color = color - 5;
         
+        
 
     }); 
     
     });
 }
-function makeInitialGrid(){
-    for(let i = 0; i < INITIAL_SIZE * INITIAL_SIZE; i++){
-        let newDiv = document.createElement('div');
-        newDiv.classList.add('grid');
-        container.appendChild(newDiv);
-     }
-}
 
-makeInitialGrid();
 
 const btn = document.querySelector('#colored-grid');
 btn.addEventListener('click', () => {
     
     removeGrid();
-    makeNewGrid();
+    makeNewGrid(getUserPrompt());
 });
 
 function removeGrid() {
@@ -48,16 +42,15 @@ function removeGrid() {
     })
 }
 
-function makeNewGrid() {
+function makeNewGrid(size) {
     
-    getUserPrompt();
-    let numberOfBoxes = boxes * boxes;
+    let numberOfBoxes = size * size;
     for (let i = 0; i < numberOfBoxes; i++){
         let newDiv = document.createElement('div');
         newDiv.classList.add('grid');
         container.appendChild(newDiv);
     }
-    let newHeight = newWidth = 360 / boxes ;
+    let newHeight = newWidth = 360 / size ;
     console.log(newHeight);
     const newDivs = document.querySelectorAll('.grid');
     newDivs.forEach(element => {
@@ -69,14 +62,15 @@ function makeNewGrid() {
 };
 
 function getUserPrompt() {
+    let boxes;
     do {
     boxes = prompt("how many squares per side you want for the new grid(between 1-69)",)
     if (boxes == null || boxes <= 0 || boxes > 69 || boxes == " "){
         alert("invalid input")
     }
-    } while (boxes == null || boxes <= 0 || boxes > 69 || boxes == " ");
+    } while (boxes === null || boxes <= 0 || boxes > 69 || boxes.trim === "" || isNaN(boxes));
     
-
+    return boxes;
 
 }
 
